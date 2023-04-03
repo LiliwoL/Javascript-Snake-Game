@@ -1,18 +1,18 @@
 window.onload = function()
 {
 	// Variables globales
-	var canvasWidth = 900;
-	var canvasHeight = 600;
-	var blocksize = 30;
-	var canvas, ctx;
-	var delay = 300; // Delai en millisecondes
-	var snake;
-	var apple;
-	var score = 0;
+	let canvasWidth = 900;
+	let canvasHeight = 600;
+	let blocksize = 30;
+	let canvas, ctx;
+	let delay = 300; // Delai en millisecondes
+	let snake;
+	let apple;
+	let score = 0;
 
 	// Définition de la largeur en terme de block et non en pixel
-	var widthInBlock = canvasWidth / blocksize;
-	var heightInBlock = canvasHeight / blocksize;
+	let widthInBlock = canvasWidth / blocksize;
+	let heightInBlock = canvasHeight / blocksize;
 
 	// Appel de la fonction init
 	init();
@@ -32,19 +32,25 @@ window.onload = function()
 		// Ajout du canvas au body
 		document.body.appendChild(canvas);
 
-
 		// ******** Dessiner dans le canvas
 
 		// Récupération du contexte
 		ctx = canvas.getContext('2d');
 
 		// Construction du serpent avec son body, et maintenant sa direction
-		snake = new Snake([ [9, 3], [8, 3], [7, 3], [6, 3],	[5, 3], [4, 3], [4,3], [4,3], [1,3] ], "right");
-
-		apple = new Apple([10,10]);
+		createSnakeAndApple();
 
 		// Appel de la fonction de refresh
 		refreshCanvas();
+	}
+
+	// Création du serpent et d'une pomme
+	function createSnakeAndApple()
+	{
+		// Construction du serpent avec son body, et maintenant sa direction
+		snake = new Snake([ [9, 3], [8, 3], [7, 3], [6, 3],	[5, 3], [4, 3], [4,3], [4,3], [1,3] ], "right");
+
+		apple = new Apple([10,10]);
 	}
 
 	// Refresh du canvas
@@ -135,11 +141,7 @@ window.onload = function()
 	function resetGame()
 	{
 		// Recrée les objets serpent et pomme
-
-		// Construction du serpent avec son body, et maintenant sa direction
-		snake = new Snake([ [9, 3], [8, 3], [7, 3], [6, 3],	[5, 3], [4, 3], [4,3], [4,3], [1,3] ], "right");
-
-		apple = new Apple([10,10]);
+		createSnakeAndApple();
 
 		// Appel de la fonction de refresh
 		refreshCanvas();

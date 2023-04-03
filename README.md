@@ -1,11 +1,13 @@
 # Mythique jeu du serpent
 
+![](readme_docs/logo.png)
+
 ## Utilisation du canvas
 
 
 ### 1. Initialisation
 
-```
+```js
 window.onlad = function()
 {
 	// Création du canvas
@@ -37,7 +39,7 @@ window.onlad = function()
 
 On va organiser le code, déclarer des variables globales et ajouter un timer
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -102,7 +104,7 @@ window.onload = function()
 
 Ici, on va ajouter la capacité du serpent à évoluer dans l'espace.
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -222,7 +224,7 @@ Souci si le serpent revient sur ses pas!
 On va gérer les événements clavier
 Ajouter la prise en compte du changement de direction
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -418,7 +420,7 @@ window.onload = function()
 Le serpent fonctionne, se déplace en fonction du clavier.
 On ajoute une pomme dans le canvas.
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -653,7 +655,7 @@ On détecte la collision de la tête uniquement contre les murs et contre son pr
 Pour tester la collision avec le corps, il aura fallu allonger le corps.
 On peut aussi modifier le délai pour ajuster la vitesse du serpent
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -944,7 +946,7 @@ On pourrait aussi ajouter des points, allonger le serpent...
 
 Il faut aussi vérifier que la pomme n'est pas repositionnée sur le corps du serpent
 
-```
+```js
 window.onload = function()
 {
 	// Variables globales
@@ -1292,7 +1294,7 @@ Si je mande une pomme, on allonge le serpent
 
 Ca va se placer vers:
 
-```
+```js
 // Retrait de la queue du serpent
 this.body.pop();
 ```
@@ -1301,7 +1303,7 @@ On va dire au serpent de ne pas retirer sa dernière case UNIQUEMENT si une pomm
 
 On modifie donc uniquement la classe serpent:
 
-```
+```js
 // Objet Serpent
 function Snake(body, direction)
 {
@@ -1468,7 +1470,7 @@ function Snake(body, direction)
 On va créer une fonction GameOver.
 Elle va afficher à l'écran GameOver et un message pour relancer le jeu
 
-```
+```js
 // Fonction d'affichage de fin de jeu
 	function gameOver()
 	{
@@ -1481,7 +1483,7 @@ Elle va afficher à l'écran GameOver et un message pour relancer le jeu
 ```
 
 Fonction de relance du jeu
-```
+```js
 // Fonction relance le jeu appelée quand on appuie sur espace
 	function resetGame()
 	{
@@ -1499,7 +1501,7 @@ Fonction de relance du jeu
 
 
 Modification de la prise en compte de la touche Espace
-```
+```js
 // Evénements du clavier
 	document.addEventListener('keydown', handleKeydown);
 	function handleKeydown( ev )
@@ -1540,5 +1542,5 @@ Modification de la prise en compte de la touche Espace
 
 Vitesse du serpent, enregistrement des scores...
 
-Modification des mot clés var en let ou const
+Modification des mots clés var en let ou const
 Fonctions fléchées...
