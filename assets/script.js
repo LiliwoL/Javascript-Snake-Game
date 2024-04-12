@@ -1,18 +1,21 @@
+/*
+	Fonction qui sera exécutée au chargement de la page
+ */
 window.onload = function()
 {
 	// Variables globales
 	let canvasWidth = 900;
 	let canvasHeight = 600;
-	let blocksize = 30;
+	let blockSize = 30;
 	let canvas, ctx;
-	let delay = 300; // Delai en millisecondes
+	let delay = 300; 					// Delai en millisecondes
 	let snake;
 	let apple;
 	let score = 0;
 
 	// Définition de la largeur en terme de block et non en pixel
-	let widthInBlock = canvasWidth / blocksize;
-	let heightInBlock = canvasHeight / blocksize;
+	let widthInBlock = canvasWidth / blockSize;
+	let heightInBlock = canvasHeight / blockSize;
 
 	// Appel de la fonction init
 	init();
@@ -83,7 +86,7 @@ window.onload = function()
 				while( apple.isOnSnake(snake) );
 
 				// En fonction du score, on accélère tous les 5 points
-				if(score % 5 == 0){
+				if(score % 5 === 0){
                     speedUp();
                 }
 			}
@@ -97,7 +100,7 @@ window.onload = function()
 			// Dessin de la pomme
 			apple.draw();
 
-			// Afficghe du score
+			// Affichage du score
 			drawScore();
 
 			// ******* Mise en place d'un timer
@@ -108,11 +111,11 @@ window.onload = function()
 	function drawBlock (ctx, position)
 	{
 		// Détermination en pixels de la position
-		var x = position[0] * blocksize;
-		var y = position[1] * blocksize;
+		var x = position[0] * blockSize;
+		var y = position[1] * blockSize;
 
 		// Remplissage du block avec les coordonnées calculées
-		ctx.fillRect(x, y, blocksize, blocksize);
+		ctx.fillRect(x, y, blockSize, blockSize);
 	}
 
 	// Fonction d'affichage de fin de jeu
@@ -156,22 +159,32 @@ window.onload = function()
         ctx.textBaseline = "middle";
         ctx.fillText(score.toString(), canvasWidth /2, canvasHeight /2);
         ctx.restore();
-    };
+    }
 
 	// Fonction d'accélération du délai
 	function speedUp() {
         delay /= 2;
-    };
+    }
 
-	// Objet Serpent
+
+	/**
+	 * Définition d'une classe Serpent
+	 *
+	 * Le constructeur attend les paramètres:	 *
+	 * @param body
+	 * @param direction
+	 * @constructor
+	 */
 	function Snake(body, direction)
 	{
 		// Propriétés du serpent
-		this.body = body;
-		this.direction = direction
-		this.ateApple = false;		// Au cas où le serpent viet de manger une pomme
+		this.body 				= body;
+		this.direction 			= direction
+		this.ateApple 			= false;		// Au cas où le serpent viet de manger une pomme
 
-		// Méthode draw
+		/**
+		 * Méthode pour dessiner le serpent
+		 */
 		this.draw = function ()
 		{
 			// Sauvegarde du contexte
@@ -181,15 +194,18 @@ window.onload = function()
 			ctx.fillStyle = "#ff0000";
 
 			// Boucle
-			// Le corps du serpent sera un ensembl de petits rectangles
-			for (var i=0; i < this.body.length; i++)
+			// Le corps du serpent sera un ensemble de petits rectangles
+			for (let i=0; i < this.body.length; i++)
 			{
 				drawBlock(ctx, this.body[i]);
 			}
 			ctx.restore();
 		}
 
-		// Méthode pour faire avancer le serpent
+
+		/**
+		 * Méthode pour faire avancer le serpent
+		 */
 		this.move = function()
 		{
 			// Récupération de la position de la tête du serpent
@@ -218,7 +234,7 @@ window.onload = function()
 					throw("Invalid direction");
 			}
 
-			// On ajoute cette nouvelle position au courps du serpent
+			// On ajoute cette nouvelle position au corps du serpent
 			// unshift ajoute en première case
 			this.body.unshift( nextHeadPosition );
 
@@ -233,11 +249,16 @@ window.onload = function()
 			}
 		}
 
-		// Méthode pour changer la direction
+
+		/**
+		 * Méthode pour changer la direction
+		 *
+		 * @param newDirection
+		 */
 		this.setDirection = function ( newDirection )
 		{
-			var allowedDirections;
-			// Quelle direction sont permises?
+			let allowedDirections;
+			// Quelles directions sont permises?
 			switch (this.direction)
 			{
 				case "left":
@@ -252,25 +273,30 @@ window.onload = function()
 					throw("Invalid direction");
 			}
 
-			// Avant de changer la direction on regarde le contenu du tableau allowedDirections avec la fonction indexOf
+			// Avant de changer la direction, on regarde le contenu du tableau allowedDirections avec la fonction indexOf
 			if (allowedDirections.indexOf( newDirection ) > -1)
 			{
 				this.direction = newDirection;
 			}
 		}
 
-		// Méthode pour vérifier les collisions
+
+		/**
+		 * Méthode pour vérifier les collisions
+		 *
+ 		 * @returns {boolean}
+		 */
 		this.checkCollision = function ()
 		{
 			// Collision sur un mur
-			var wallCollision = false;
+			let wallCollision = false;
 
-			// collision sur lui même
-			var selfCollision = false;
+			// collision sur lui-même
+			let selfCollision = false;
 
 			// On a besoin de tester uniquement la tête, c'est la tête qui entre en collision!
-			var headSnake = this.body[0]; // headSnake est donc un tableau de coordonnées
-			var bodySnake = this.body.slice(1); // On coupe à partir de la case 1
+			let headSnake = this.body[0]; // headSnake est donc un tableau de coordonnées
+			let bodySnake = this.body.slice(1); // On coupe à partir de la case 1
 
 			// en ES6, on aurait pu écrire ça avec le destructuring en:
 			//let [headSnake, ...bodySnake] = this.body;
@@ -295,7 +321,7 @@ window.onload = function()
 			}
 
 			// Test de la collision avec son propre corps
-			for ( var i=0; i < bodySnake.length; i++ )
+			for ( let i=0; i < bodySnake.length; i++ )
 			{
 				if (
 					headSnake[0] === bodySnake[i][0] &&
@@ -309,16 +335,22 @@ window.onload = function()
 			return wallCollision || selfCollision;
 		}
 
-		// Méthode de détection de pomme mangée
+
+		/**
+		 * Méthode pour détecter si le serpent vient de manger une pomme
+		 *
+		 * @param apple
+		 * @returns {boolean}
+		 */
 		this.isEatingApple = function ( apple )
 		{
 			// Récupération de la tête du serpent
-			var headSnake = this.body[0];
+			let headSnake = this.body[0];
 
 			// Test de correspondance des coordonnées de la pomme et de la tête
-			if ( headSnake[0] == apple.position[0] // Coordonnées X
+			if ( headSnake[0] === apple.position[0] // Coordonnées X
 				&&
-				headSnake[1] == apple.position[1] // Coordonnées Y
+				headSnake[1] === apple.position[1] // Coordonnées Y
 			){
 				// On définit cette propriété à true pour indiquer que le serpent vient de manger une pomme
 				this.ateApple = true;
@@ -329,12 +361,23 @@ window.onload = function()
 		}
 	}
 
-	// Objet Pomme
-	// La position doit etre le milieu d'un bloc!
+
+
+	/**
+	 * Définition d'une classe Pomme
+	 *
+	 * Le constructeur attend le paramètre position:
+	 * 		La position doit etre le milieu d'un bloc!
+	 * @param position
+	 * @constructor
+	 */
 	function Apple (position)
 	{
 		this.position = position;
 
+		/**
+		 * Méthode pour dessiner la pomme
+		 */
 		this.draw = function ()
 		{
 			// Sauvegarde du contexte
@@ -345,11 +388,11 @@ window.onload = function()
 
 			ctx.beginPath();
 			// Le rayon correspond à la moitié d'un bloc
-			var radius = blocksize / 2;
+			let radius = blockSize / 2;
 
 			// La position doit etre le milieu d'un bloc!
-			var x = this.position[0] * blocksize + radius;
-			var y = this.position[1] * blocksize + radius;
+			let x = this.position[0] * blockSize + radius;
+			let y = this.position[1] * blockSize + radius;
 
 			// Fonction qui va dessiner le cercle
 			ctx.arc(x, y, radius, 0, Math.PI *2, true);
@@ -359,31 +402,40 @@ window.onload = function()
 			ctx.restore();
 		}
 
-		// Méthode pour déplacer la pomme
+
+
+		/**
+		 * Méthode pour déplacer la pomme
+		 */
 		this.setNewPosition = function ()
 		{
 			// Nombre ENTIER au hasard entre 0 et widthInBlock -1, soit 29
-			var newX = Math.round(Math.random() * (widthInBlock -1));
-			var newY = Math.round(Math.random() * (heightInBlock -1));
+			let newX = Math.round(Math.random() * (widthInBlock -1));
+			let newY = Math.round(Math.random() * (heightInBlock -1));
 
 			// Modification de la position de la pomme
 			this.position = [newX, newY];
 		}
 
-		// Méthode pour vérifier que la pomme n'a pas été placée sur le corps du serpent!
+
+		/**
+		 * Méthode pour vérifier que la pomme n'a pas été placée sur le corps du serpent
+		 * @param snake
+		 * @returns {boolean}
+		 */
 		this.isOnSnake = function ( snake )
 		{
 			// Par défaut, à non
-			var isOnSnake = false;
+			let isOnSnake = false;
 
 			// Parcours du corps du serpent
-			for (var i=0; i<snake.body.length; i++) // En ES6 on pourrait passer à for.. of
+			for (let i=0; i<snake.body.length; i++) // En ES6 on pourrait passer à for.. of
 			{
 				// Test des positions
 				if (
-					this.position[0] == snake.body[i][0] // Test du X
+					this.position[0] === snake.body[i][0] // Test du X
 					&&
-					this.position[1] == snake.body[i][1] // Test du Y
+					this.position[1] === snake.body[i][1] // Test du Y
 				)
 				{
 					isOnSnake = true;
@@ -394,15 +446,19 @@ window.onload = function()
 		}
 	}
 
-	// Evénements du clavier
+	// ====================================================================================================
+	// ********** Gestion des événements clavier
+	// ====================================================================================================
+
+	// Touche pressée (n'importe laquelle)
 	document.addEventListener('keydown', handleKeydown);
 	function handleKeydown( ev )
 	{
-		var key = ev.keyCode;
+		let key = ev.keyCode;
 
 		//console.log(key);
 
-		var newDirection;
+		let newDirection;
 		// https://keyevents.netlify.app/
 		switch (key)
 		{

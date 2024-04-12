@@ -1544,3 +1544,38 @@ Vitesse du serpent, enregistrement des scores...
 
 Modification des mots clés var en let ou const
 Fonctions fléchées...
+
+# Diagrammes
+
+## Diagramme de classe
+
+```plantuml
+@startuml
+'https://plantuml.com/class-diagram
+
+
+class Snake {
+Array body
+string direction
+boolean ateApple false
+
+    constructor(Array body, string direction): Snake
+    draw(): void
+    move(): void
+    setDirection(string newDirection): void
+    checkCollision(): boolean
+    isEatingApple(apple): boolean
+}
+
+class Apple {
+Array position
+
+    constructor(Array position): Apple
+    draw(): void
+    setNewPosition(): void
+    isOnSnake( Snake ): boolean
+    isEatingApple(apple): boolean
+}
+
+@enduml
+```
