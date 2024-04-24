@@ -1,0 +1,55 @@
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+title Jeu du serpent
+
+start
+:Chargement de la page terminée;
+:Définition des variables globales de jeu;
+:Définition de la classe Snake;
+:Définition de la classe Apple;
+:Création du canvas et ajout du canvas au body;
+:Création du contexte 2D (pour pouvoir écrire sur le canvas);
+:Création de la fonction de dessin (qui sera appelée par les classes Snake et Apple);
+:Instance du serpent;
+:Instance de la pomme;
+
+' Lancement du jeu
+repeat
+    :Lancement de la boucle de jeu;
+    :Ecoute des touches du clavier
+    :Affichage du score;
+    :Affichage du serpent;
+    :Affichage de la pomme;
+
+    repeat
+        :Déplacement du serpent;
+        :Changement de direction du serpent en fonction de la touche appuyée;
+        fork
+            :Vérification de la collision avec la pomme;
+            if (La pomme est mangée ?) then (oui)
+                :Augmentation du score de 1;
+                :Augmentation de la taille du serpent;
+                :Augmentation de la vitesse du serpent;
+                :Création d'une nouvelle pomme;
+            else (non)
+            endif
+        fork again
+            :Vérification de la collision avec les bords du canvas;
+            if (Collision avec les bords du canvas ?) then (oui)
+                :Game over;
+                stop
+            else (non)
+            endif
+        end fork;
+    repeat while (Le jeu est terminé (game over) ?) is (non) not (oui)
+    :Affichage du message de fin de jeu;
+    :Vidage du canvas;
+    :Affichage du score;
+    :Affichage du bouton de rejouer;
+
+repeat while (La touche espace est appuyée ?) is (oui) not (non)
+:Fin du jeu;
+stop
+
+@enduml

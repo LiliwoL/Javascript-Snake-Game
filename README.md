@@ -1579,3 +1579,9 @@ Array position
 
 @enduml
 ```
+
+## Diagramme de séquence
+
+```plantuml
+@startuml
+'https://plantuml.com/sequence-diagram
