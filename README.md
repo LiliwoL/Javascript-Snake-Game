@@ -1,11 +1,51 @@
-# Mythique jeu du serpent
+# Mythique jeu du serpent en Javascript
 
 ![](readme_docs/logo.png)
 
-## Utilisation du canvas
+<!-- TOC -->
+* [Mythique jeu du serpent en Javascript](#mythique-jeu-du-serpent-en-javascript)
+* [Objectif](#objectif)
+* [Diagrammes UML](#diagrammes-uml)
+  * [Diagramme de classe](#diagramme-de-classe)
+  * [Diagramme d'activité](#diagramme-dactivité)
+* [Etapes](#etapes)
+  * [1. Initialisation](#1-initialisation)
+  * [2. Amélioration et Timer](#2-amélioration-et-timer)
+  * [3. Mouvement du serpent](#3-mouvement-du-serpent)
+  * [4. Diriger le serpent avec le clavier](#4-diriger-le-serpent-avec-le-clavier)
+  * [5. Ajouter la pomme](#5-ajouter-la-pomme)
+  * [6. Limites des murs et de lui même](#6-limites-des-murs-et-de-lui-même)
+  * [7. Le serpent a t'il mangé la pomme?](#7-le-serpent-a-til-mangé-la-pomme)
+  * [8. Allongement du serpent](#8-allongement-du-serpent)
+  * [9. Score, et Game Over](#9-score-et-game-over)
+  * [10. Améliorations](#10-améliorations)
+<!-- TOC -->
 
+# Objectif
 
-### 1. Initialisation
+- Programmation Orientée Objet en Javascript
+- Analyse et conception d'un jeu simple
+- Découverte des **listeners** de touches
+- Utilisation du **canvas** pour dessiner
+- Utilisation de **setTimeout** pour gérer le temps
+
+---
+
+# Diagrammes UML
+
+## Diagramme de classe
+
+![](readme_docs/class_diagram.png)
+
+## Diagramme d'activité
+
+![](readme_docs/activity_diagram.png)
+
+---
+
+# Etapes
+
+## 1. Initialisation
 
 ```js
 window.onlad = function()
@@ -35,7 +75,7 @@ window.onlad = function()
 }
 ```
 
-### 2. Amélioration et Timer
+## 2. Amélioration et Timer
 
 On va organiser le code, déclarer des variables globales et ajouter un timer
 
@@ -100,7 +140,7 @@ window.onload = function()
 }
 ```
 
-### 3. Mouvement du serpent
+## 3. Mouvement du serpent
 
 Ici, on va ajouter la capacité du serpent à évoluer dans l'espace.
 
@@ -218,7 +258,7 @@ window.onload = function()
 }
 ```
 
-### 4. Diriger le serpent avec le clavier
+## 4. Diriger le serpent avec le clavier
 
 Souci si le serpent revient sur ses pas!
 On va gérer les événements clavier
@@ -415,7 +455,7 @@ window.onload = function()
 }
 ```
 
-### 5. Ajouter la pomme
+## 5. Ajouter la pomme
 
 Le serpent fonctionne, se déplace en fonction du clavier.
 On ajoute une pomme dans le canvas.
@@ -642,7 +682,7 @@ window.onload = function()
 }
 ```
 
-### 6. Limites des murs et de lui même
+## 6. Limites des murs et de lui même
 
 Le serpent ne peut pas dépasser le mur, s'il touche les bords, c'est perdu!
 
@@ -933,7 +973,7 @@ window.onload = function()
 }
 ```
 
-### 7. Le serpent a t'il mangé la pomme?
+## 7. Le serpent a t'il mangé la pomme?
 
 Ajustez la longueur du corps, et la vitesse.
 
@@ -1288,9 +1328,9 @@ window.onload = function()
 }
 ```
 
-### 8. Allongement du serpent
+## 8. Allongement du serpent
 
-Si je mande une pomme, on allonge le serpent
+Si je mange une pomme, on allonge le serpent
 
 Ca va se placer vers:
 
@@ -1465,10 +1505,10 @@ function Snake(body, direction)
 }
 ```
 
-### 9. Score, et Game Over
+## 9. Score, et Game Over
 
-On va créer une fonction GameOver.
-Elle va afficher à l'écran GameOver et un message pour relancer le jeu
+On va créer une fonction **GameOver**.
+Elle va afficher à l'écran **GameOver** et un message pour relancer le jeu
 
 ```js
 // Fonction d'affichage de fin de jeu
@@ -1538,50 +1578,10 @@ Modification de la prise en compte de la touche Espace
 	}
 ```
 
-### 10. Améliorations
+## 10. Améliorations
 
-Vitesse du serpent, enregistrement des scores...
+Vitesse du serpent, enregistrement des scores en localStorage...
+Jeu multijoueur
 
 Modification des mots clés var en let ou const
 Fonctions fléchées...
-
-# Diagrammes
-
-## Diagramme de classe
-
-```plantuml
-@startuml
-'https://plantuml.com/class-diagram
-
-
-class Snake {
-Array body
-string direction
-boolean ateApple false
-
-    constructor(Array body, string direction): Snake
-    draw(): void
-    move(): void
-    setDirection(string newDirection): void
-    checkCollision(): boolean
-    isEatingApple(apple): boolean
-}
-
-class Apple {
-Array position
-
-    constructor(Array position): Apple
-    draw(): void
-    setNewPosition(): void
-    isOnSnake( Snake ): boolean
-    isEatingApple(apple): boolean
-}
-
-@enduml
-```
-
-## Diagramme de séquence
-
-```plantuml
-@startuml
-'https://plantuml.com/sequence-diagram
